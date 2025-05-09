@@ -1,12 +1,9 @@
 runtime: python310
 entrypoint: gunicorn -b :$PORT main:app
 
-env_variables:
-  DB_HOST: "your-project-id:your-region:your-instance-id"  # Cloud SQL connection name
-  DB_USER: "your-db-username"
-  DB_PASSWORD: "your-db-password"
-  DB_NAME: "your-db-name"
-
 handlers:
-  - url: /.*  # Matches all requests
-    script: auto
+- url: /static
+  static_dir: static
+
+- url: /.*
+  script: auto
