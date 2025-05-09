@@ -13,6 +13,8 @@ def init_db():
     conn.commit()
     conn.close()
 
+init_db()  # Make sure DB is initialized even when running on GAE
+
 @app.route('/')
 def home():
     return redirect(url_for('login'))
@@ -55,7 +57,3 @@ def profile():
     if 'username' in session:
         return render_template('profile.html', username=session['username'])
     return redirect(url_for('login'))
-
-if __name__ == '__main__':
-    init_db()
-    app.run(debug=True)
